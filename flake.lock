@@ -1,0 +1,143 @@
+{
+  "nodes": {
+    "baycomp": {
+      "inputs": {
+        "nixpkgs": "nixpkgs",
+        "src": "src"
+      },
+      "locked": {
+        "lastModified": 1639481292,
+        "narHash": "sha256-BX3p9ru6bkPY5dD1K63WKlCSLfmkchdh29W2rvUoHC4=",
+        "owner": "dpaetzel",
+        "repo": "flake-baycomp",
+        "rev": "f5a862d9ff9d24aeff66b39fcb58c9615d86bbf6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dpaetzel",
+        "repo": "flake-baycomp",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1639161226,
+        "narHash": "sha256-75Y08ynJDTq6HHGIF+8IADBJSVip0UyWQH7jqSFnRR8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "573095944e7c1d58d30fc679c81af63668b54056",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-21.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1639161226,
+        "narHash": "sha256-75Y08ynJDTq6HHGIF+8IADBJSVip0UyWQH7jqSFnRR8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "573095944e7c1d58d30fc679c81af63668b54056",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-21.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1639161226,
+        "narHash": "sha256-75Y08ynJDTq6HHGIF+8IADBJSVip0UyWQH7jqSFnRR8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "573095944e7c1d58d30fc679c81af63668b54056",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-21.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "overlays": {
+      "locked": {
+        "lastModified": 1639481218,
+        "narHash": "sha256-67wlhb/jyZM6rKw9ogFRu02l/7E9yWB+Ifiz0tpDDE8=",
+        "owner": "dpaetzel",
+        "repo": "overlays",
+        "rev": "335e67f0abfbc8a493b2bd6fe23e3f74da96dac2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dpaetzel",
+        "repo": "overlays",
+        "type": "github"
+      }
+    },
+    "pystan": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3",
+        "src": "src_2"
+      },
+      "locked": {
+        "lastModified": 1639481360,
+        "narHash": "sha256-heHHCNUGtP9yYWU8T5i8qKbmLx/PatMUuDyw8on7qw0=",
+        "owner": "dpaetzel",
+        "repo": "flake-pystan-2.19.1.1",
+        "rev": "8b56331489d608b367c850e1d36d4b32e98e0d0e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dpaetzel",
+        "repo": "flake-pystan-2.19.1.1",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "baycomp": "baycomp",
+        "nixpkgs": "nixpkgs_2",
+        "overlays": "overlays",
+        "pystan": "pystan"
+      }
+    },
+    "src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1639399339,
+        "narHash": "sha256-qHT2+Lid0EJZJRQ0ZpiBfBs+p3C9HX4KQTQFrmaJnrQ=",
+        "owner": "janezd",
+        "repo": "baycomp",
+        "rev": "4cffdb34ad812b0efa6177f3986d86bf48c6ccea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "janezd",
+        "repo": "baycomp",
+        "type": "github"
+      }
+    },
+    "src_2": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-l43y3Co5dIYyr7DqwJGBIchQGCAt/L9UGAPn86qgvYg=",
+        "type": "tarball",
+        "url": "https://files.pythonhosted.org/packages/10/9f/dcecf31ac08842a675ec337a14439b37d75f6da42f034b1fd5eb90b10b84/pystan-2.19.1.1.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://files.pythonhosted.org/packages/10/9f/dcecf31ac08842a675ec337a14439b37d75f6da42f034b1fd5eb90b10b84/pystan-2.19.1.1.tar.gz"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

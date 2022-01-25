@@ -19,7 +19,6 @@ read
 
 
 set -x GUNICORN_CMD_ARGS "--timeout 180"
-nix develop ".#mlflowShell" --command \
-    mlflow ui \
+mlflow ui \
     --backend-store-uri "$mlruns" \
     --default-artifact-root "$mlruns"

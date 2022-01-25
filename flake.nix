@@ -54,12 +54,17 @@
         pname = "fetser";
         version = "1.0.0";
         src = self;
+
         buildPhase = "";
         installPhase = ''
           mkdir -p $out/bin
           cp fetch-results $out/bin
           cp serve-results $out/bin
         '';
+
+        propagatedBuildInputs = [
+          python.pkgs.mlflow
+        ];
       };
     };
 }

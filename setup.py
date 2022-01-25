@@ -16,7 +16,7 @@ setup(
     install_requires=[
         "baycomp",
         "mlflow ==1.22.0",
-        "numpy ==1.21.2",
+        "numpy ==1.21.4",
         "pandas ==1.3.4",
         "pystan ==2.19.1.1",
     ])

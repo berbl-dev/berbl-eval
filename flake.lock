@@ -6,11 +6,11 @@
         "src": "src"
       },
       "locked": {
-        "lastModified": 1639481292,
-        "narHash": "sha256-BX3p9ru6bkPY5dD1K63WKlCSLfmkchdh29W2rvUoHC4=",
+        "lastModified": 1643117145,
+        "narHash": "sha256-coGHPoigQdR8v3+QYfse+fLdNEC4JO+hkPISeDGCjNM=",
         "owner": "dpaetzel",
         "repo": "flake-baycomp",
-        "rev": "f5a862d9ff9d24aeff66b39fcb58c9615d86bbf6",
+        "rev": "dd704a0734e3119eceb43ae10ce177e05111100e",
         "type": "github"
       },
       "original": {
@@ -21,17 +21,17 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1639161226,
-        "narHash": "sha256-75Y08ynJDTq6HHGIF+8IADBJSVip0UyWQH7jqSFnRR8=",
+        "lastModified": 1642940213,
+        "narHash": "sha256-LXGwfPrtbhix9IRUT2phtbJsur41lkTsrKcTcS0lzIc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "573095944e7c1d58d30fc679c81af63668b54056",
+        "rev": "8ca77a63599ed951d6a2d244c1d62092776a3fe1",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-21.11",
         "repo": "nixpkgs",
+        "rev": "8ca77a63599ed951d6a2d244c1d62092776a3fe1",
         "type": "github"
       }
     },
@@ -53,17 +53,17 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1639161226,
-        "narHash": "sha256-75Y08ynJDTq6HHGIF+8IADBJSVip0UyWQH7jqSFnRR8=",
+        "lastModified": 1642940213,
+        "narHash": "sha256-LXGwfPrtbhix9IRUT2phtbJsur41lkTsrKcTcS0lzIc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "573095944e7c1d58d30fc679c81af63668b54056",
+        "rev": "8ca77a63599ed951d6a2d244c1d62092776a3fe1",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-21.11",
         "repo": "nixpkgs",
+        "rev": "8ca77a63599ed951d6a2d244c1d62092776a3fe1",
         "type": "github"
       }
     },
@@ -88,11 +88,11 @@
         "src": "src_2"
       },
       "locked": {
-        "lastModified": 1639481360,
-        "narHash": "sha256-heHHCNUGtP9yYWU8T5i8qKbmLx/PatMUuDyw8on7qw0=",
+        "lastModified": 1643117030,
+        "narHash": "sha256-6RxpgoS33tHhFIX8DJVMf1W6NeiGWtZrJfBHk9yc7HM=",
         "owner": "dpaetzel",
         "repo": "flake-pystan-2.19.1.1",
-        "rev": "8b56331489d608b367c850e1d36d4b32e98e0d0e",
+        "rev": "3a784914b0920406725148c8960da4277d8511fb",
         "type": "github"
       },
       "original": {

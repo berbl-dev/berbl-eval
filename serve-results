@@ -1,0 +1,25 @@
+#!/usr/bin/env fish
+
+
+set pwd (pwd)
+
+
+set mlruns $argv[1]
+
+
+set mlruns (readlink -f $mlruns)
+
+
+set dir (dirname $mlruns)
+
+
+echo "Serving from $dir with tracking URI $mlruns."
+echo "Continue? (abort with Ctrl-C, continue with Enter)"
+read
+
+
+set -x GUNICORN_CMD_ARGS "--timeout 180"
+nix develop ".#mlflowShell" --command \
+    mlflow ui \
+    --backend-store-uri "$mlruns" \
+    --default-artifact-root "$mlruns"

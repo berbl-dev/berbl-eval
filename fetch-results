@@ -1,0 +1,40 @@
+#!/usr/bin/env fish
+
+
+set base_path /data/oc-compute03/hoffmada/berbl
+
+
+# berbl-exp-2022-evostar
+set exp_path $argv[1]
+
+
+if test -z $argv[2]
+    set exp_time \
+        (ssh ad -- ls $base_path/$exp_path/results | tail -1)
+else
+    # 2022-01-24T15:23:12.447768
+    set exp_time $argv[2]
+end
+
+
+set fetch_dir "$base_path/$exp_path/results/"
+
+
+set node oc-compute03
+
+
+# Local directories to store copied data in.
+set dir (pwd)/results/
+
+
+echo "Fetching results from $fetch_dir/$exp_time to $dir."
+echo "Continue? (abort with Ctrl-C, continue with Enter)"
+read
+
+
+mkdir -p $dir
+
+
+# Fetch data.
+ssh ad "tar vczpf - -C '$fetch_dir' '$exp_time'" \
+    | tar vxzpf - -C "$dir" --overwrite

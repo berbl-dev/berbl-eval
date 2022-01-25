@@ -45,7 +45,22 @@
           license = licenses.gpl3;
         };
       };
-      mlflowShell = mkShell { packages = [ python.pkgs.mlflow ]; };
+
+      devShell."${system}" = mkShell {
+        packages = [ python.pkgs.mlflow packages.fetser."${system}" ];
+      };
+
+      packages.fetser."${system}" = stdenv.mkDerivation {
+        pname = "fetser";
+        version = "1.0.0";
+        src = self;
+        buildPhase = "";
+        installPhase = ''
+          mkdir -p $out/bin
+          cp fetch-results $out/bin
+          cp serve-results $out/bin
+        '';
+      };
     };
 }
 

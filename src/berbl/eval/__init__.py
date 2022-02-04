@@ -50,7 +50,7 @@ def task_name(exp_name):
     return re.sub(".*\..*\.", "", exp_name)
 
 
-def read_mlflow(exp_names, commit=None):
+def read_mlflow(exp_names, commit=None, check_finished=True):
     print("Loading runs from mlflow and checking data, may take a few "
           "seconds …")
     runs = pd.DataFrame()
@@ -66,9 +66,10 @@ def read_mlflow(exp_names, commit=None):
                 max_results=10000,
                 output_format="pandas")
 
-        # Check whether all runs being considered are finished
-        assert (rs.status != "FINISHED"
-                ).sum() == 0, f"Some runs for {exp_name} are not FINISHED yet."
+        if check_finished:
+            # Check whether all runs being considered are finished
+            assert (rs.status != "FINISHED").sum(
+            ) == 0, f"Some runs for {exp_name} are not FINISHED yet."
 
         rs["algorithm"], rs["variant"], rs["task"] = exp_name.split(".")
         runs = runs.append(rs)

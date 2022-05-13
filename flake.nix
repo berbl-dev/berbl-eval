@@ -4,7 +4,7 @@
   # 2022-01-24
   inputs.nixpkgs.url =
     "github:NixOS/nixpkgs/8ca77a63599ed951d6a2d244c1d62092776a3fe1";
-  inputs.baycomp.url = "github:dpaetzel/flake-baycomp"; # numpy 1.21.2
+  inputs.baycomp.url = "github:dpaetzel/baycomp/add-flake-nix";
   inputs.overlays.url = "github:dpaetzel/overlays";
 
   outputs = { self, nixpkgs, overlays, baycomp }:

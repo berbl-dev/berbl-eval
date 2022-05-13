@@ -6,16 +6,49 @@
         "src": "src"
       },
       "locked": {
-        "lastModified": 1643117145,
-        "narHash": "sha256-coGHPoigQdR8v3+QYfse+fLdNEC4JO+hkPISeDGCjNM=",
+        "lastModified": 1652453058,
+        "narHash": "sha256-LxMeUe5QGEYGqCinCqUso3BTTmX2z+uH3xCygcmpWX8=",
         "owner": "dpaetzel",
         "repo": "flake-baycomp",
-        "rev": "dd704a0734e3119eceb43ae10ce177e05111100e",
+        "rev": "1cb4b6aea5a0de93caf4b93dd4079674cbcc00e0",
         "type": "github"
       },
       "original": {
         "owner": "dpaetzel",
         "repo": "flake-baycomp",
+        "type": "github"
+      }
+    },
+    "kerasTunerSrc": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1636132191,
+        "narHash": "sha256-DOMAz7Yjb3vfKYqjnhJZYhV1hrTgeOzkHc48XHUNrmM=",
+        "owner": "keras-team",
+        "repo": "keras-tuner",
+        "rev": "4146d8e3182df6c4ce928e853a7b3c977ab00034",
+        "type": "github"
+      },
+      "original": {
+        "owner": "keras-team",
+        "ref": "1.1.0",
+        "repo": "keras-tuner",
+        "type": "github"
+      }
+    },
+    "ktLegacySrc": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1628631947,
+        "narHash": "sha256-BYe9boMpoGdFuhEfhXRytxmLq89hjejofDTugoYi0kY=",
+        "owner": "haifeng-jin",
+        "repo": "kt-legacy",
+        "rev": "15686b5e2d25b7094134d68956b2edce5dffa7a0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "haifeng-jin",
+        "repo": "kt-legacy",
         "type": "github"
       }
     },
@@ -51,53 +84,22 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
-      "locked": {
-        "lastModified": 1642940213,
-        "narHash": "sha256-LXGwfPrtbhix9IRUT2phtbJsur41lkTsrKcTcS0lzIc=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "8ca77a63599ed951d6a2d244c1d62092776a3fe1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "8ca77a63599ed951d6a2d244c1d62092776a3fe1",
-        "type": "github"
-      }
-    },
     "overlays": {
-      "locked": {
-        "lastModified": 1642861482,
-        "narHash": "sha256-yubYKws/g4LReVEy/y7cpJjXs3JGRUttpR8hgjaPGxA=",
-        "owner": "dpaetzel",
-        "repo": "overlays",
-        "rev": "d3e0907efa9d87394869047902fc00a4721972dd",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dpaetzel",
-        "repo": "overlays",
-        "type": "github"
-      }
-    },
-    "pystan": {
       "inputs": {
-        "nixpkgs": "nixpkgs_3",
-        "src": "src_2"
+        "kerasTunerSrc": "kerasTunerSrc",
+        "ktLegacySrc": "ktLegacySrc"
       },
       "locked": {
-        "lastModified": 1643117030,
-        "narHash": "sha256-6RxpgoS33tHhFIX8DJVMf1W6NeiGWtZrJfBHk9yc7HM=",
+        "lastModified": 1647347991,
+        "narHash": "sha256-UYO60L03uNiEvb3uGc8AeCk2if6xObz/mURbviEbtJ4=",
         "owner": "dpaetzel",
-        "repo": "flake-pystan-2.19.1.1",
-        "rev": "3a784914b0920406725148c8960da4277d8511fb",
+        "repo": "overlays",
+        "rev": "0ee7f9e874d1679c4303759968887ca80571b257",
         "type": "github"
       },
       "original": {
         "owner": "dpaetzel",
-        "repo": "flake-pystan-2.19.1.1",
+        "repo": "overlays",
         "type": "github"
       }
     },
@@ -105,36 +107,23 @@
       "inputs": {
         "baycomp": "baycomp",
         "nixpkgs": "nixpkgs_2",
-        "overlays": "overlays",
-        "pystan": "pystan"
+        "overlays": "overlays"
       }
     },
     "src": {
       "flake": false,
       "locked": {
-        "lastModified": 1639399339,
-        "narHash": "sha256-qHT2+Lid0EJZJRQ0ZpiBfBs+p3C9HX4KQTQFrmaJnrQ=",
+        "lastModified": 1648741820,
+        "narHash": "sha256-czIHbHi3hiI6cCwe6aVi903numCbc0Ic4l3SOY/oJcI=",
         "owner": "janezd",
         "repo": "baycomp",
-        "rev": "4cffdb34ad812b0efa6177f3986d86bf48c6ccea",
+        "rev": "9fc56da7c8b56eb1dbd2df725e18606818434a20",
         "type": "github"
       },
       "original": {
         "owner": "janezd",
         "repo": "baycomp",
         "type": "github"
-      }
-    },
-    "src_2": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-l43y3Co5dIYyr7DqwJGBIchQGCAt/L9UGAPn86qgvYg=",
-        "type": "tarball",
-        "url": "https://files.pythonhosted.org/packages/10/9f/dcecf31ac08842a675ec337a14439b37d75f6da42f034b1fd5eb90b10b84/pystan-2.19.1.1.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://files.pythonhosted.org/packages/10/9f/dcecf31ac08842a675ec337a14439b37d75f6da42f034b1fd5eb90b10b84/pystan-2.19.1.1.tar.gz"
       }
     }
   },

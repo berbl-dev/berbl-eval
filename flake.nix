@@ -4,11 +4,10 @@
   # 2022-01-24
   inputs.nixpkgs.url =
     "github:NixOS/nixpkgs/8ca77a63599ed951d6a2d244c1d62092776a3fe1";
-  inputs.pystan.url = "github:dpaetzel/flake-pystan-2.19.1.1"; # numpy 1.21.2
   inputs.baycomp.url = "github:dpaetzel/flake-baycomp"; # numpy 1.21.2
   inputs.overlays.url = "github:dpaetzel/overlays";
 
-  outputs = { self, nixpkgs, overlays, pystan, baycomp }:
+  outputs = { self, nixpkgs, overlays, baycomp }:
     let system = "x86_64-linux";
     in with import nixpkgs {
       inherit system;
@@ -24,14 +23,18 @@
 
         src = self;
 
+        # TODO In order to provide a proper default flake here we need to
+        # package pystan/httpstan properly (>= version 3.4.0). For now, we
+        # assume that pystan is already there.
+        postPatch = ''
+          sed -i "s/^.*pystan.*$//" setup.py
+        '';
+
         propagatedBuildInputs = with python.pkgs; [
           baycomp.packages."${system}".baycomp
           mlflow
           numpy # 1.21.2
           pandas
-          pystan.packages."${system}".pystan
-
-          # having either of baycomp or pystan here breaks the build
 
           # scipy
           # numpydoc

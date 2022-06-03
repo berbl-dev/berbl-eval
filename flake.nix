@@ -4,10 +4,12 @@
   # 2022-01-24
   inputs.nixpkgs.url =
     "github:NixOS/nixpkgs/8ca77a63599ed951d6a2d244c1d62092776a3fe1";
-  inputs.baycomp.url = "github:dpaetzel/baycomp/add-flake-nix";
+
+  inputs.baycomp.url = "github:dpaetzel/baycomp";
+  inputs.cmpbayes.url = "github:dpaetzel/cmpbayes";
   inputs.overlays.url = "github:dpaetzel/overlays";
 
-  outputs = { self, nixpkgs, overlays, baycomp }:
+  outputs = { self, nixpkgs, baycomp, cmpbayes, overlays }:
     let system = "x86_64-linux";
     in with import nixpkgs {
       inherit system;
@@ -31,29 +33,42 @@
         '';
 
         propagatedBuildInputs = with python.pkgs; [
+          packages."${system}".fetser
+
+          cmpbayes.defaultPackage."${system}"
           baycomp.packages."${system}".baycomp
+          matplotlib
           mlflow
+          networkx
           numpy # 1.21.2
           pandas
 
-          # scipy
-          # numpydoc
-          # sphinx
+          python
+          ipython
+
+          # We use ugly venvShellHook here because packaging pystan/httpstan is
+          # not entirely straightforward.
+          venvShellHook
         ];
 
-        doCheck = false;
+        venvDir = "./_venv";
 
-        meta = with lib; {
-          description = "Helpers for evaluating BERBL experiments";
-          license = licenses.gpl3;
-        };
+        postShellHook = ''
+          unset SOURCE_DATE_EPOCH
+
+          export LD_LIBRARY_PATH="${
+            lib.makeLibraryPath [ stdenv.cc.cc ]
+          }:$LD_LIBRARY_PATH";
+          PYTHONPATH=$PWD/$venvDir/${python.sitePackages}:$PYTHONPATH
+        '';
+
+        postVenvCreation = ''
+          unset SOURCE_DATE_EPOCH
+          pip install pystan==3.4.0
+        '';
       };
 
-      devShell."${system}" = mkShell {
-        packages = [ python.pkgs.mlflow packages.fetser."${system}" ];
-      };
-
-      packages.fetser."${system}" = stdenv.mkDerivation {
+      packages."${system}".fetser = stdenv.mkDerivation {
         pname = "fetser";
         version = "1.0.0";
         src = self;

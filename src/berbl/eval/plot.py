@@ -41,8 +41,8 @@ def plot_prediction(ax, artifact_uri):
         pass
 
 
-def save_plot(exp_name, plot_name, fig):
-    fig_folder = f"eval/plots/{exp_name}"
+def save_plot(eval_name, exp_name, plot_name, fig):
+    fig_folder = f"eval/{eval_name}/plots/{exp_name}"
     os.makedirs(fig_folder, exist_ok=True)
     fig_file = f"{fig_folder}/{plot_name}.pdf"
     print(f"Storing plot in {fig_file}")

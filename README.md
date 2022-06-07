@@ -13,8 +13,13 @@ This package has two purposes.
      Implementation, Replicability, Comparison with XCSF*.
      [DOI](https://doi.org/10.1145/3512290.3528736).
 
+     - [[scripts/gecco2022.py]] performs the statistical evaluation reported on
+       in Sections 5.2 and 5.4.
+     - [[scripts/gecco2022-xcsf-param-search.py]] performs the statistical
+       evaluation reported on in Section 5.3.
 
-## Running the experiments
+
+## Running the statistical evaluation scripts
 
 
 We'll exemplarily show how to run the statistical evaluation for the 2022 GECCO

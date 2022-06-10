@@ -2,7 +2,9 @@
   "nodes": {
     "baycomp": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1652457566,
@@ -20,14 +22,16 @@
     },
     "cmpbayes": {
       "inputs": {
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
-        "lastModified": 1654252913,
-        "narHash": "sha256-SdzVpanZEfufyGlQUMP0J6OrnyAL4yEgG8APpbl3+W8=",
+        "lastModified": 1654862513,
+        "narHash": "sha256-lVJJde72rMxBIR/tH98yD4PXUQ/2jHYSOIqxMR62Xgc=",
         "owner": "dpaetzel",
         "repo": "cmpbayes",
-        "rev": "bce49c5cf713e3c2df7b76fa05e313d6fb5f826d",
+        "rev": "4185051389c1ca10e7a7bc92e68cf108c07788b9",
         "type": "github"
       },
       "original": {
@@ -71,22 +75,6 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1642940213,
-        "narHash": "sha256-LXGwfPrtbhix9IRUT2phtbJsur41lkTsrKcTcS0lzIc=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "8ca77a63599ed951d6a2d244c1d62092776a3fe1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "8ca77a63599ed951d6a2d244c1d62092776a3fe1",
-        "type": "github"
-      }
-    },
-    "nixpkgs_2": {
-      "locked": {
         "lastModified": 1645433236,
         "narHash": "sha256-4va4MvJ076XyPp5h8sm5eMQvCrJ6yZAbBmyw95dGyw4=",
         "owner": "nixos",
@@ -98,22 +86,6 @@
         "owner": "nixos",
         "repo": "nixpkgs",
         "rev": "7f9b6e2babf232412682c09e57ed666d8f84ac2d",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
-        "lastModified": 1642940213,
-        "narHash": "sha256-LXGwfPrtbhix9IRUT2phtbJsur41lkTsrKcTcS0lzIc=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "8ca77a63599ed951d6a2d244c1d62092776a3fe1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "8ca77a63599ed951d6a2d244c1d62092776a3fe1",
         "type": "github"
       }
     },
@@ -140,7 +112,7 @@
       "inputs": {
         "baycomp": "baycomp",
         "cmpbayes": "cmpbayes",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs",
         "overlays": "overlays"
       }
     }

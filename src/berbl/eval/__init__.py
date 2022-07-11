@@ -169,3 +169,21 @@ def print_stat_results(name1, name2, metric, probs, rope, higher_better):
     print(f"p({name1} << {name2}) = {p_worse}")
     print(f"p({name1} ≡ {name2}) = {p_equal}")
     print(f"p({name1} >> {name2}) = {p_better}")
+
+
+def smart_print(df, latex):
+    """
+    Prints the given [pandas.DataFrame] to stdout.
+
+    Parameters
+    ----------
+
+    df : pandas.DataFrame
+        The [pandas.DataFrame] to be printed.
+    latex : bool
+        Whether to produce LaTeX output (if `False`, produce markdown output).
+    """
+    if latex:
+        print(df.to_latex())
+    else:
+        print(df.to_markdown())

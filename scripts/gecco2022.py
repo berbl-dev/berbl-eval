@@ -13,6 +13,7 @@ warnings.simplefilter(action='ignore', category=pd.errors.PerformanceWarning)
 # https://jwalton.info/Matplotlib-latex-PGF/
 
 import matplotlib
+
 matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
 
@@ -23,6 +24,7 @@ metrics = {"p_M_D": True, "mae": False, "size": False}
 ropes = {"p_M_D": 10, "mae": 0.01, "size": 0.5}
 
 reps = 10
+
 
 # Not entirely sure whether this generalizes properly but it seems to work so
 # far.
@@ -177,7 +179,7 @@ def plot_median_predictions(runs, path, graphs):
         # Since we have some experiments that were only standardized runs, we
         # have to shortcut here sometimes.
         if (exp_name == ('berbl', 'standardized', 'generated_function')
-            or exp_name == ('berbl', 'standardized', 'sparse_noisy_data')):
+                or exp_name == ('berbl', 'standardized', 'sparse_noisy_data')):
             continue
 
         r = median_run(rs, metric, algorithm, variant, task)
@@ -251,9 +253,10 @@ def table_stat_tests_berbl_xcsf(runs):
 
     rs_lit = rs_interval[rs_interval["params.literal"] == "True"]
     rs_mod = rs_interval[rs_interval["params.literal"] == "False"]
-    assert len(rs_lit) == len(rs_mod), ("Different number of runs for "
-                                        f"interval-based literal ({len(rs_lit)}) and "
-                                        f"modular ({len(rs_mod)})")
+    assert len(rs_lit) == len(rs_mod), (
+        "Different number of runs for "
+        f"interval-based literal ({len(rs_lit)}) and "
+        f"modular ({len(rs_mod)})")
 
     groups_lit = rs_lit.sort_values("task").groupby(
         "task")[f"metrics.elitist.{metric}"]
@@ -327,8 +330,7 @@ def plot_extra_xcsf_prediction(runs, path, task, graphs):
     print()
 
     data_seed = median_run(keep_unstandardized(runs), "metrics.elitist.p_M_D",
-                           "berbl", "non_literal",
-                           task)["params.data.seed"]
+                           "berbl", "non_literal", task)["params.data.seed"]
 
     exp_name = f"xcsf.book.{task}"
 

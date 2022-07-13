@@ -412,32 +412,6 @@ def plot_berbl_pred_dist(runs, path, task, graphs):
         plt.close("all")
 
 
-# Name of task and whether soft interval matching is used.
-berbl_experiments = [
-    "book.generated_function",
-    "book.sparse_noisy_data",
-    "book.sine",
-    "book.variable_noise",
-    # Not in the book but required for fairer comparison with XCSF.
-    "additional_literal.generated_function",
-    "additional_literal.sparse_noisy_data",
-    # Expected to behave the same as the literal implementation.
-    "non_literal.generated_function",
-    "non_literal.sparse_noisy_data",
-    "non_literal.sine",
-    "non_literal.variable_noise",
-    # Not in the book but required for fairer comparison with XCSF.
-    "additional_non_literal.generated_function",
-    "additional_non_literal.sparse_noisy_data",
-]
-xcsf_experiments = [
-    "book.generated_function",
-    "book.sparse_noisy_data",
-    "book.sine",
-    "book.variable_noise",
-]
-
-
 @click.command()
 @click.argument("PATH")
 @click.option("--graphs/--no-graphs",
@@ -453,25 +427,12 @@ def main(path, graphs, commit):
     Analyse the parameter search results found at PATH (PATH is expected to be
     an mlflow tracking URI, e.g. an mlruns folder).
     """
-    mlflow.set_tracking_uri(path)
+    runs = read_runs(path)
 
-    berbl_experiment_names = [
-        f"berbl.{exp_name}" for exp_name in berbl_experiments
-    ]
-    berbl_experiments_standardized_names = [
-        "berbl.standardized.generated_function",
-        "berbl.standardized.sparse_noisy_data",
-    ]
-    xcsf_experiment_names = [
-        f"xcsf.{exp_name}" for exp_name in xcsf_experiments
-    ]
-    exp_names = (berbl_experiment_names + berbl_experiments_standardized_names
-                 + xcsf_experiment_names)
+    assert all(
+        runs.groupby(level=["algorithm", "variant", "task"]).agg(len)
+        % 50 == 0)
 
-    # runs = read_mlflow(exp_names, commit=commit, check_finished=False)
-    runs = read_mlflow(exp_names, commit=commit)
-
-    print(runs.groupby(level=["algorithm", "variant", "task"]).agg(len))
     n_runs = (
         # BERBL experiments (4 from book, 4 from book with modular backend, 2
         # additional each with interval-based matching).

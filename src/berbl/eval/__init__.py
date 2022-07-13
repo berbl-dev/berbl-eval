@@ -50,36 +50,43 @@ def task_name(exp_name):
     return re.sub(".*\..*\.", "", exp_name)
 
 
-def read_mlflow(exp_names, commit=None, check_finished=True):
-    print("Loading runs from mlflow and checking data, may take a few "
-          "seconds …")
-    runs = pd.DataFrame()
-    for exp_name in exp_names:
-        expid = exp_id(exp_name)
-        if commit is None:
-            rs = mlflow.search_runs(expid,
-                                    max_results=10000,
-                                    output_format="pandas")
-        else:
-            rs = mlflow.search_runs(
-                expid, (f"tags.mlflow.source.git.commit = '{commit}'"),
-                max_results=10000,
-                output_format="pandas")
+def read_runs(path):
+    """
+    Reads all the runs at the given mlflow tracking URI into a
+    [pandas.DataFrame].
 
-        if check_finished:
-            # Check whether all runs being considered are finished
-            assert (rs.status != "FINISHED").sum(
-            ) == 0, f"Some runs for {exp_name} are not FINISHED yet."
+    Parameters
+    ----------
+    path : string or object
+        Argument to [mlflow.set_tracking_uri]. Typically, the path to an
+        `mlruns` directory.
+    """
+    mlflow.set_tracking_uri(path)
 
-        rs["algorithm"], rs["variant"], rs["task"] = exp_name.split(".")
-        runs = runs.append(rs)
+    exp_names = [exp.name for exp in mlflow.list_experiments()]
+    df = mlflow.search_runs(
+        experiment_names=[exp.name for exp in mlflow.list_experiments()])
 
-    runs.index = pd.MultiIndex.from_arrays(
-        [runs["algorithm"], runs["variant"], runs["task"], runs.index])
-    del runs["algorithm"]
-    del runs["variant"]
-    del runs["task"]
-    return runs
+    # Weird that mlflow does not export the experiment name in the run object.
+    df["experiment_name"] = df["experiment_id"].apply(
+        lambda expid: mlflow.get_experiment(expid).name)
+
+    cols = df["experiment_name"].str.split(".", expand=True).rename(columns={
+        0: "algorithm",
+        1: "variant",
+        2: "task"
+    })
+    df = df.join(cols)
+
+    df.index = pd.MultiIndex.from_arrays(
+        [df["algorithm"], df["variant"], df["task"], df.index])
+    del df["algorithm"]
+    del df["variant"]
+    del df["task"]
+
+    df = df.sort_index()
+
+    return df
 
 
 def keep_unstandardized(runs):

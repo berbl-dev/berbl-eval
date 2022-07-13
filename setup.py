@@ -8,7 +8,7 @@ setup(
     description="Helpers for evaluating BERBL experiments",
     author="berbl",
     author_email="berbl@berbl.berbl",
-    url="https://github.com/tmp-berbl/berbl-eval",
+    url="https://github.com/berbl-dev/berbl-eval",
     packages=[
         "berbl.eval"
     ],

@@ -12,7 +12,7 @@
   inputs.cmpbayes.url = "github:dpaetzel/cmpbayes";
   inputs.cmpbayes.inputs.nixpkgs.follows = "nixpkgs";
 
-  outputs = { self, nixpkgs, baycomp, cmpbayes, overlays }:
+  outputs = { self, nixpkgs, baycomp, cmpbayes }:
     let system = "x86_64-linux";
     in with import nixpkgs {
       inherit system;

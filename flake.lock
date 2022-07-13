@@ -27,84 +27,32 @@
         ]
       },
       "locked": {
-        "lastModified": 1654862513,
-        "narHash": "sha256-lVJJde72rMxBIR/tH98yD4PXUQ/2jHYSOIqxMR62Xgc=",
+        "lastModified": 1656426737,
+        "narHash": "sha256-lkVa8rSfWvH5OGrKNEMCiU5figF4eyllLSddyauvoHM=",
         "owner": "dpaetzel",
         "repo": "cmpbayes",
-        "rev": "4185051389c1ca10e7a7bc92e68cf108c07788b9",
+        "rev": "62366d1585027d2aed66c97485e52dfc7098582b",
         "type": "github"
       },
       "original": {
         "owner": "dpaetzel",
         "repo": "cmpbayes",
-        "type": "github"
-      }
-    },
-    "kerasTunerSrc": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1636132191,
-        "narHash": "sha256-DOMAz7Yjb3vfKYqjnhJZYhV1hrTgeOzkHc48XHUNrmM=",
-        "owner": "keras-team",
-        "repo": "keras-tuner",
-        "rev": "4146d8e3182df6c4ce928e853a7b3c977ab00034",
-        "type": "github"
-      },
-      "original": {
-        "owner": "keras-team",
-        "ref": "1.1.0",
-        "repo": "keras-tuner",
-        "type": "github"
-      }
-    },
-    "ktLegacySrc": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1628631947,
-        "narHash": "sha256-BYe9boMpoGdFuhEfhXRytxmLq89hjejofDTugoYi0kY=",
-        "owner": "haifeng-jin",
-        "repo": "kt-legacy",
-        "rev": "15686b5e2d25b7094134d68956b2edce5dffa7a0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "haifeng-jin",
-        "repo": "kt-legacy",
         "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1645433236,
-        "narHash": "sha256-4va4MvJ076XyPp5h8sm5eMQvCrJ6yZAbBmyw95dGyw4=",
+        "lastModified": 1653816466,
+        "narHash": "sha256-wLTkas+ZBBywE0J+b9oeHK2PnU7QjXKNGnBlYlB9JVQ=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "7f9b6e2babf232412682c09e57ed666d8f84ac2d",
+        "rev": "af04d4eb146cb3784c883a76997613f2524e310e",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "7f9b6e2babf232412682c09e57ed666d8f84ac2d",
-        "type": "github"
-      }
-    },
-    "overlays": {
-      "inputs": {
-        "kerasTunerSrc": "kerasTunerSrc",
-        "ktLegacySrc": "ktLegacySrc"
-      },
-      "locked": {
-        "lastModified": 1647347991,
-        "narHash": "sha256-UYO60L03uNiEvb3uGc8AeCk2if6xObz/mURbviEbtJ4=",
-        "owner": "dpaetzel",
-        "repo": "overlays",
-        "rev": "0ee7f9e874d1679c4303759968887ca80571b257",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dpaetzel",
-        "repo": "overlays",
+        "rev": "af04d4eb146cb3784c883a76997613f2524e310e",
         "type": "github"
       }
     },
@@ -112,8 +60,7 @@
       "inputs": {
         "baycomp": "baycomp",
         "cmpbayes": "cmpbayes",
-        "nixpkgs": "nixpkgs",
-        "overlays": "overlays"
+        "nixpkgs": "nixpkgs"
       }
     }
   },

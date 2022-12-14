@@ -1,24 +1,29 @@
 {
   description = "The berbl-eval library";
 
-  # 2022-01-24
-  inputs.nixpkgs.url =
-    # "github:NixOS/nixpkgs/8ca77a63599ed951d6a2d244c1d62092776a3fe1";
-    # From cmpbayes, 2022-02-21.
-    "github:nixos/nixpkgs/af04d4eb146cb3784c883a76997613f2524e310e";
+  inputs = {
+    berbl-exp.url = "github:berbl-dev/berbl-exp/simplify-running-experiments";
 
-  inputs.baycomp.url = "github:dpaetzel/baycomp";
-  inputs.baycomp.inputs.nixpkgs.follows = "nixpkgs";
-  inputs.cmpbayes.url = "github:dpaetzel/cmpbayes";
-  inputs.cmpbayes.inputs.nixpkgs.follows = "nixpkgs";
-
-  outputs = { self, nixpkgs, baycomp, cmpbayes }:
-    let system = "x86_64-linux";
-    in with import nixpkgs {
-      inherit system;
+    baycomp.url = "github:dpaetzel/baycomp";
+    baycomp.inputs.nixpkgs.follows = "berbl-exp/berbl/nixos-config/nixpkgs";
+    # cmpbayes.url = "github:dpaetzel/cmpbayes";
+    # cmpbayes.inputs.nixpkgs.follows = "nixpkgs";
+    cmpbayes = {
+      type = "path";
+      inputs.nixos-config.follows = "berbl-exp/berbl/nixos-config";
+      path = "/home/david/Code/cmpbayes";
     };
+  };
 
-    let python = python39;
+  outputs = { self, berbl-exp, baycomp, cmpbayes }:
+    let
+      system = "x86_64-linux";
+      nixpkgs = berbl-exp.inputs.berbl.inputs.nixos-config.inputs.nixpkgs;
+      pkgs = import nixpkgs { inherit system; };
+      # TODO Instead of hardcoding the Python version here, it should be
+      # provided to defaultPackage sensibly (e.g. by allowing some sort of
+      # override)?
+      python = pkgs.python310;
     in rec {
 
       defaultPackage."${system}" = python.pkgs.buildPythonPackage rec {
@@ -27,30 +32,33 @@
 
         src = self;
 
+        # We use pyproject.toml.
+        format = "pyproject";
+
         # TODO In order to provide a proper default flake here we need to
         # package pystan/httpstan properly (>= version 3.4.0). For now, we
         # assume that pystan is already there.
         postPatch = ''
-          sed -i "s/^.*pystan.*$//" setup.py
+          sed -i "s/^.*pystan.*$//" setup.cfg
         '';
 
         propagatedBuildInputs = with python.pkgs; [
-          packages."${system}".fetser
-
           cmpbayes.defaultPackage."${system}"
-          baycomp.packages."${system}".baycomp
+          baycomp.defaultPackage."${system}"
           matplotlib
           mlflow
           networkx
           numpy
           pandas
 
-          python
           ipython
+
+          scikit-learn
+          deap
         ];
       };
 
-      packages."${system}".fetser = stdenv.mkDerivation {
+      packages."${system}".fetser = pkgs.stdenv.mkDerivation {
         pname = "fetser";
         version = "1.0.0";
         src = self;
@@ -62,29 +70,31 @@
           cp serve-results $out/bin
         '';
 
-        propagatedBuildInputs = [
-          python.pkgs.mlflow
-        ];
+        propagatedBuildInputs = [ python.pkgs.mlflow ];
       };
 
       devShell.${system} = pkgs.mkShell {
 
+        packages = [
+          python.pkgs.ipython
+          (python.withPackages (p: [ defaultPackage."${system}" ]))
+          python.pkgs.venvShellHook
+          packages."${system}".fetser
+        ];
+
         # We use ugly venvShellHook here because packaging pystan/httpstan is
         # not entirely straightforward.
-        packages =
-          with python.pkgs;
-          [ ipython python venvShellHook ]
-          ++ [ defaultPackage."${system}"
-               packages."${system}".fetser
-             ];
-
         venvDir = "./_venv";
 
         postShellHook = ''
           unset SOURCE_DATE_EPOCH
 
-          PYTHONPATH=$PWD/$venvDir/${python.sitePackages}:$PYTHONPATH
+          export LD_LIBRARY_PATH="${
+            pkgs.lib.makeLibraryPath [ pkgs.stdenv.cc.cc ]
+          }:$LD_LIBRARY_PATH";
         '';
+        # Seems not to be required any more.
+        # PYTHONPATH=$PWD/$venvDir/${python.sitePackages}:$PYTHONPATH
 
         # Using httpstan==4.7.2 (the default as of 2022-06-10) leads to a
         # missing symbols error on NixOS. 4.7.1 works, however, so we use that.
@@ -96,5 +106,3 @@
       };
     };
 }
-
-# TODO Swap to setup.cfg pyproject.toml layout

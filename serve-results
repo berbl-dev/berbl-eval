@@ -14,6 +14,7 @@ set dir (dirname $mlruns)
 
 
 echo "Serving from $dir with tracking URI $mlruns."
+echo "Note that you should provide the mlruns folder here."
 echo "Continue? (abort with Ctrl-C, continue with Enter)"
 read
 
